@@ -1,6 +1,7 @@
 const http = require('http');
 const debug = require('debug');
 const app = require('./app');
+const DatabaseService = require('./services/databaseService');
 require('dotenv').config();
 
 //logger
@@ -26,3 +27,6 @@ server.on('error', (error) => {
 server.on('listening', () => {
   logger('servidor arriba en el puerto:', port);
 });
+
+// Start mongo connect
+DatabaseService.connection();
