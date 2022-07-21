@@ -7,10 +7,8 @@ const logger = debug('courier-api:Auth');
 
 class AuthService {
   static async authenticateUser(email, password) {
-    const userMatch = await authModel.users.find(
-        o => o.email === email
-    );
-//logger(userMatch);
+    const userMatch = await authModel.users.find((o) => o.email === email);
+    //logger(userMatch);
     if (userMatch) {
       if (await AuthUtilities.compareHash(password, userMatch.password)) {
         const payload = {
@@ -26,7 +24,6 @@ class AuthService {
       }
     } else {
       return 'Credenciales incorrectas';
-      
     }
   }
 }

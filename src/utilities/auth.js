@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const debug = require('debug');
 
-
 const logger = debug('courier-api:Util-Auth');
 
 class AuthUtilities {
@@ -22,8 +21,8 @@ class AuthUtilities {
   static compareHash(text, hash) {
     return new Promise(async (resolve, reject) => {
       try {
-       // logger(text)
-       // logger(hash);
+        // logger(text)
+        // logger(hash);
         const resultComparition = await bcrypt.compare(text, hash);
         //logger(resultComparition);
         resolve(resultComparition);
@@ -36,7 +35,7 @@ class AuthUtilities {
   static async signToken(data, timeExpired) {
     return new Promise((resolve, reject) => {
       try {
-        const token = jwt.sign(data, "123456789!\"#$%&/", {
+        const token = jwt.sign(data, process.env.JWT_SECRET_KEY, {
           expiresIn: timeExpired,
         });
         resolve(token);
